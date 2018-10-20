@@ -1,0 +1,15 @@
+{% if Lang.lang == 'Eng' %}
+Editing subcategory.
+
+Current subcategory {{ Ad.subcategory }}
+
+Select new subcategory:
+{% elif Lang.lang == 'Rus' %}
+Редактируем подкатегорию.
+
+Текущая подкатегория: {{ Ad.subcategory }}
+
+Выберите новую подкатегорию:
+{% elif Lang.lang == 'Uzb' %}
+-
+{% endif %}

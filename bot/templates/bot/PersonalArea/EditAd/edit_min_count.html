@@ -1,0 +1,15 @@
+{% if Lang.lang == 'Eng' %}
+Editing min. count
+
+Current valurs: {{ Ad.min_count }}
+
+Enter new value:
+{% elif Lang.lang == 'Rus' %}
+Редактируем минимальное количество.
+
+Текущее значение: {{ Ad.min_count }}
+
+Укажите новое значение:
+{% elif Lang.lang == 'Uzb' %}
+-
+{% endif %}

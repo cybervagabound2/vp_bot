@@ -1,0 +1,15 @@
+{% if Lang.lang == 'Eng' %}
+🗑 <b>Deleting ad</b>
+
+Channel {{ Ad.channel_name }}
+
+Are you sure want to delete this ad?
+{% elif Lang.lang == 'Rus' %}
+🗑 <b>Удаляем объявление</b>
+
+Канал: {{ Ad.channel_name }}
+
+Вы уверены, что хотите удалить данное объявление?
+{% elif Lang.lang == 'Uzb' %}
+-
+{% endif %}

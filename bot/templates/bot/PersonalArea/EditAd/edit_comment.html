@@ -1,0 +1,15 @@
+{% if Lang.lang == 'Eng' %}
+Editing comment.
+
+Current comment: {{ Ad.comment }}
+
+Enter new comment:
+{% elif Lang.lang == 'Rus' %}
+Редактируем комментарий.
+
+Текущий комментарий: {{ Ad.comment }}
+
+Укажите новый комментарий:
+{% elif Lang.lang == 'Uzb' %}
+-
+{% endif %}

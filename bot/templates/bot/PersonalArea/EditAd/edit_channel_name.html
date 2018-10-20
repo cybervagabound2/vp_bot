@@ -1,0 +1,15 @@
+{% if Lang.lang == 'Eng' %}
+Editing channel name:
+
+Current channel name: {{ Ad.channel_name }}
+
+Enter new channel name:
+{% elif Lang.lang == 'Rus' %}
+Редактируем название канала:
+
+Текущее название канала: {{ Ad.channel_name }}
+
+Укажите новое название канала:
+{% elif Lang.lang == 'Uzb' %}
+-
+{% endif %}

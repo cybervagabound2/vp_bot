@@ -1,0 +1,21 @@
+{% if Lang.lang == 'Eng' %}
+📠 <b>Edit ads</b>
+
+Editing ad of channel: {{ Ad.channel_name }}
+Subcategory: {{ Ad.subcategory }}
+Min. count {{ Ad.min_count }}
+Comment: {{ Ad.comment }}
+
+What i should change?:
+{% elif Lang.lang == 'Rus' %}
+📠 <b>Редактировать объявления</b>
+
+Редактируем объявление канала: {{ Ad.channel_name }}
+Подкатегория: {{ Ad.subcategory }}
+Мин. количество: {{ Ad.min_count }}
+Комментарий: {{ Ad.comment }}
+
+Что изменить?:
+{% elif Lang.lang == 'Uzb' %}
+-
+{% endif %}

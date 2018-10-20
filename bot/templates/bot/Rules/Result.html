@@ -1,0 +1,17 @@
+{% if Lang.lang == 'Eng' %}
+    👋 Welcome, {{ User.FirstName }} {{ User.LastName }}.
+
+• This bot help you to find ad about finding Mutual PR or create own ad.
+
+• All neccesary information is placed in personal area.
+
+• Feedback: @mutual_admin
+{% elif Lang.lang == 'Rus' %}
+    👋<b> Добро пожаловать, {{ User.FirstName }} {{ User.LastName }}.</b>
+
+• Данный бот помогает найти объяление о поиске Взаимного пиара или создать свое объявление.
+
+• Вся необходимая информация находится в личном кабинете
+
+• Связь с администратором: @mutual_admin
+{% endif %}
