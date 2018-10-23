@@ -76,7 +76,7 @@ class Users(models.Model):
 
     def Error(selt, bot, e, patch):
         bot.send_message(text=patch+'\n'+str(e),
-                         chat_id=657753504)
+                         chat_id=523792555)
         return
 
     def SendMessage(self, bot, msg, keyboard=None, photo=None, save_massage_id=None):

@@ -12,7 +12,7 @@ def get_count_ads(subcategory, user_lang):
 
 def categories_menu(bot, update):
     user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
-    user.params += '/Telegram'
+    user.params += '/Telegram/Subcategory'
     user.save()
     node = MutualPRCategory.objects.get(id=1)
     subcategories = node.get_children()

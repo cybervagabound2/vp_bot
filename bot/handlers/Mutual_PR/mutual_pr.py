@@ -4,7 +4,10 @@ from bot.models import Users, MutualPRCategory, Ad
 
 
 def mutual_menu(bot, update):
-    user = Users.objects.get(telegram_id=update.message.chat.id)
+    if update.message:
+        user = Users.objects.get(telegram_id=update.message.chat.id)
+    elif update.callback_query:
+        user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
     user.params = '/Mutual'
     user.save()
     context = {'Lang': user.lang}

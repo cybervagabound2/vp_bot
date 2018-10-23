@@ -115,4 +115,5 @@ DIS.add_handler(CallbackQueryHandler(feedback.feedback, pattern='^PA_feedback$')
 DIS.add_handler(CallbackQueryHandler(feedback.write_message, pattern='^pa_feedback_create$'))
 
 
-DIS.add_handler(CallbackQueryHandler(back_inline, pattern='^back_inline$'))
+DIS.add_handler(CallbackQueryHandler(back_inline, pattern='^back_inline$',
+                                     pass_user_data=True))

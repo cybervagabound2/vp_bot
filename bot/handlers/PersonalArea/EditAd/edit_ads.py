@@ -11,7 +11,7 @@ def edit_ads_menu(bot, update):
     if user.params == '/PersonalArea/Ads':
         user.params += '/Editing'
     else:
-        user.DelEndParams(3)
+        user.DelEndParams(2)
         user.params += '/Editing'
     user.save()
     ads = Ad.objects.filter(creator=user)
@@ -37,7 +37,12 @@ def edit(bot, update, user_data):
             user_data.clear()
             user.DelEndParams(2)
         else:
-            ad = Ad.objects.get(id=query.data[10:])
+            if user.params == '/PersonalArea/Ads/Editing':
+                ad = Ad.objects.get(id=query.data[10:])
+            else:
+                ad = Ad.objects.get(id=int(re.findall('Editing/(\d+)', user.params)[0]))
+                user.DelEndParams()
+
     else:
         user = Users.objects.get(telegram_id=update.message.chat.id)
         ad = Ad.objects.get(id=user_data['ad_id'])
@@ -171,7 +176,7 @@ def save(bot, update):
     user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
     context = {'Lang': user.lang}
     msg = loader.get_template('bot/PersonalArea/EditAd/save.html').render(context)
-    user.DelEndParams(3)
+    user.DelEndParams(2)
     user.SendMessage(bot=bot, msg=msg, save_massage_id=True)
     sleep(2)
     edit_ads_menu(bot, update)
