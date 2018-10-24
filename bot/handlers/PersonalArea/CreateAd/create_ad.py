@@ -8,7 +8,10 @@ from bot.handlers.helpers import build_menu
 
 
 def ad_category(bot, update):
-    user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
+    if update.callback_query:
+        user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
+    elif update.message:
+        user = Users.objects.get(telegram_id=update.message.chat.id)
     ad = Ad.objects.create(creator=user)
     user.params += '/CreateAd'
     user.params += '/' + str(ad.id)
@@ -38,7 +41,10 @@ def set_ad_category(bot, update):
 
 
 def ad_subcategory(bot, update):
-    user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
+    if update.callback_query:
+        user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
+    elif update.message:
+        user = Users.objects.get(telegram_id=update.message.chat.id)
     user.params += '/SubCategory'
     user.save()
     context = {'Lang': user.lang}
@@ -48,7 +54,8 @@ def ad_subcategory(bot, update):
     node = MutualPRCategory.objects.get(category_name=ad.category)
     subcategories = node.get_children()
     for sub in subcategories:
-        button_list.append(ikb(sub.category_name, callback_data='PA_subcategory_' + sub.category_name))
+        button_list.append(ikb(user.GetButtons(sub.category_name), callback_data='PA_subcategory_' + sub.category_name))
+        #button_list.append(ikb(sub.category_name, callback_data='PA_subcategory_' + sub.category_name))
     button_list.append(ikb(user.GetButtons('«'), callback_data='back_inline'))
     user.SendMessage(bot=bot, msg=msg, keyboard=InlineKeyboardMarkup(build_menu(button_list, n_cols=2)), save_massage_id=True)
 
@@ -66,7 +73,10 @@ def set_ad_cat_subcat(bot, update):
 
 
 def ad_channel_name(bot, update):
-    user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
+    if update.callback_query:
+        user = Users.objects.get(telegram_id=update.callback_query.from_user.id)
+    elif update.message:
+        user = Users.objects.get(telegram_id=update.message.chat.id)
     user.params += '/ChannelName'
     user.save()
     context = {'Lang': user.lang}

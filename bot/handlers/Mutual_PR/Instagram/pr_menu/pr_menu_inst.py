@@ -7,9 +7,13 @@ from bot.handlers.helpers import build_menu
 def pr_menu_sort(bot, update, user_data):
     query = update.callback_query
     user = Users.objects.get(telegram_id=query.from_user.id)
+    if 'i_subcategory' in query.data:
+        user_data['category_name'] = query.data[13:]
+    else:
+        pass
     user.params += '/Sorting'
     user.save()
-    user_data['category_name'] = query.data[13:]
+    #user_data['category_name'] = query.data[13:]
     context = {'Lang': user.lang}
     msg = loader.get_template('bot/Mutual_PR/Telegram/pr_menu/pr_menu_sort.html').render(context)
     keyboard = InlineKeyboardMarkup([
@@ -46,7 +50,6 @@ def pr_menu(bot, update, user_data):
     context = {'Lang': user.lang,
                'Subcategory': user_data['category_name']}
     msg = loader.get_template('bot/Mutual_PR/Telegram/pr_menu/pr_menu.html').render(context)
-    user_data.clear()
     user.SendMessage(bot=bot, msg=msg, keyboard=InlineKeyboardMarkup(build_menu(button_list, n_cols=2)),
                      save_massage_id=True)
 

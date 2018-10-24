@@ -21,7 +21,7 @@ def edit_ads_menu(bot, update):
     for ad in ads:
         if 'nstagram' in ad.channel_name:
             button_list.append(ikb('@' + ad.channel_name[22:] + ' 📸', callback_data='PA_edit_ad' + str(ad.id)))
-        else:
+        elif 't.me' in ad.channel_name:
             button_list.append(ikb('@' + ad.channel_name[13:] + ' 🚀', callback_data='PA_edit_ad' + str(ad.id)))
 
     button_list.append(ikb(user.GetButtons('«'), callback_data='back_inline'))
@@ -42,11 +42,10 @@ def edit(bot, update, user_data):
             else:
                 ad = Ad.objects.get(id=int(re.findall('Editing/(\d+)', user.params)[0]))
                 user.DelEndParams()
-
     else:
         user = Users.objects.get(telegram_id=update.message.chat.id)
         ad = Ad.objects.get(id=user_data['ad_id'])
-        user_data.clear()
+        #user_data.clear()
     user.params += '/' + str(ad.id)
     user.save()
     keyboard = InlineKeyboardMarkup([
@@ -76,7 +75,8 @@ def edit_subcategory(bot, update):
     node = MutualPRCategory.objects.get(category_name=ad.category)
     subcategories = node.get_children()
     for sub in subcategories:
-        button_list.append(ikb(sub.category_name, callback_data='pa_edit_subcat_'+sub.category_name))
+        #button_list.append(ikb(sub.category_name, callback_data='pa_edit_subcat_'+sub.category_name))
+        button_list.append(ikb(user.GetButtons(sub.category_name), callback_data='pa_edit_subcat_'+sub.category_name))
     button_list.append(ikb(user.GetButtons('«'), callback_data='back_inline'))
     context = {'Lang': user.lang,
                'Ad': ad}

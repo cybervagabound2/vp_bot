@@ -15,7 +15,7 @@ from bot.handlers.Mutual_PR.Telegram.pr_menu import pr_menu
 from bot.handlers.Mutual_PR.Instagram.pr_menu import pr_menu_inst
 from bot.handlers.PersonalArea.SupportProject import support_project
 from bot.handlers.PersonalArea.Feedback import feedback
-from bot.handlers.Back import back_inline
+from bot.handlers.Back import back_inline, back
 
 
 API_TOKEN = '721609870:AAGBix6dGkIqjsA1nAY_4AtqAftYhTrN-Sc'
@@ -24,6 +24,10 @@ DIS = Dispatcher(BOT, None, workers=0)
 DIS.add_handler(CommandHandler('start', start))
 Filter = Filters.text & Filters.private & BaseFilters.FilterBan() & BaseFilters.FilterRules()
 
+
+DIS.add_handler(MessageHandler(
+    Filter & BaseFilters.FilterBack(),
+    back, pass_user_data=True))
 
 DIS.add_handler(MessageHandler(Filters.text & Filters.private & BaseFilters.FilterLang() & BaseFilters.FilterBan(),
                                Language.SelectLang))
@@ -94,8 +98,10 @@ DIS.add_handler(CallbackQueryHandler(delete_ad.delete_ad_menu, pattern='^PA_dele
 DIS.add_handler(CallbackQueryHandler(delete_ad.delete_ad_confirm, pattern='^PA_delete_ad(.*)$'))
 DIS.add_handler(CallbackQueryHandler(delete_ad.delete_ad, pattern=r'^pa_delete_ad_(.*)$'))
 # Mutual PR
-DIS.add_handler(CallbackQueryHandler(categories.categories_menu, pattern='^MP_telegram$'))
-DIS.add_handler(CallbackQueryHandler(categories_inst.categories_menu, pattern='^MP_instagram$'))
+DIS.add_handler(CallbackQueryHandler(categories.categories_menu, pattern='^MP_telegram$',
+                                     pass_user_data=True))
+DIS.add_handler(CallbackQueryHandler(categories_inst.categories_menu, pattern='^MP_instagram$',
+                                     pass_user_data=True))
 
 DIS.add_handler(CallbackQueryHandler(pr_menu.pr_menu_sort, pattern=r'^mp_subcategory(.*)$',
                                      pass_user_data=True))

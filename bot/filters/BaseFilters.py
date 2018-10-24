@@ -138,6 +138,18 @@ class FilterFeedbackSendMsg(BaseFilter):
         except:
             return False
         return user.params == '/PersonalArea/Feedback/WriteMessage'
+
+
+class FilterBack(BaseFilter):
+    def filter(self, message):
+        try:
+            user = Users.objects.get(telegram_id=message.chat.id)
+            back = user.GetButtons('«')
+            if message.text == back:
+                return True
+        except:
+            return False
+        return False
 """
 DIS.add_handler(MessageHandler(
     Filter & BaseFilters.FilterPersonalArea() & BaseFilters.FilterButtonWishesToImprove(),
