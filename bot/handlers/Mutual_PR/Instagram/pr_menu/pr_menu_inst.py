@@ -45,7 +45,7 @@ def pr_menu(bot, update, user_data):
                                 category='Instagram', subcategory=user_data['category_name']).order_by('-pub_date')
     button_list = []
     for ad in ads:
-        button_list.append(ikb('@' + ad.channel_name[13:]+' от '+str(ad.min_count), callback_data='mp_ad_' + str(ad.id)))
+        button_list.append(ikb('@' + ad.channel_name[22:]+' min. '+str(ad.min_count), callback_data='mp_ad_' + str(ad.id)))
     button_list.append(ikb(user.GetButtons('«'), callback_data='back_inline'))
     context = {'Lang': user.lang,
                'Subcategory': user_data['category_name']}

@@ -54,7 +54,7 @@ def ad_subcategory(bot, update):
     node = MutualPRCategory.objects.get(category_name=ad.category)
     subcategories = node.get_children()
     for sub in subcategories:
-        button_list.append(ikb(user.GetButtons(sub.category_name), callback_data='PA_subcategory_' + sub.category_name))
+        button_list.append(ikb(user.GetButtons(sub.category_name), callback_data='Pa_subcategory_' + sub.category_name))
         #button_list.append(ikb(sub.category_name, callback_data='PA_subcategory_' + sub.category_name))
     button_list.append(ikb(user.GetButtons('«'), callback_data='back_inline'))
     user.SendMessage(bot=bot, msg=msg, keyboard=InlineKeyboardMarkup(build_menu(button_list, n_cols=2)), save_massage_id=True)

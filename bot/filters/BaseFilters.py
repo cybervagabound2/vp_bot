@@ -150,6 +150,60 @@ class FilterBack(BaseFilter):
         except:
             return False
         return False
+
+
+class FilterAdminkaSendMsg(BaseFilter):
+    def filter(self, message):
+        try:
+            user = Users.objects.get(telegram_id=message.chat.id)
+        except:
+            return False
+        return user.params == '/Adminka/SendMsg'
+
+
+class FilterAdminkaSendMsgText(BaseFilter):
+    def filter(self, message):
+        try:
+            user = Users.objects.get(telegram_id=message.chat.id)
+        except:
+            return False
+        return user.params == '/Adminka/SendMsg/Text'
+
+
+class FilterAdminkaReplyToAmin(BaseFilter):
+    def filter(self, message):
+        try:
+            user = Users.objects.get(telegram_id=message.chat.id)
+        except:
+            return False
+        return '/ReplyToAdmin' in user.params
+
+
+class FilterAdminkaDeleteAd(BaseFilter):
+    def filter(self, message):
+        try:
+            user = Users.objects.get(telegram_id=message.chat.id)
+        except:
+            return False
+        return user.params == '/Adminka/DeleteAd'
+
+
+class FilterAdminkaReason(BaseFilter):
+    def filter(self, message):
+        try:
+            user = Users.objects.get(telegram_id=message.chat.id)
+        except:
+            return False
+        return user.params == '/Adminka/DeleteAd/Reason'
+
+
+class FilterAdminkaBroadcastText(BaseFilter):
+    def filter(self, message):
+        try:
+            user = Users.objects.get(telegram_id=message.chat.id)
+        except:
+            return False
+        return user.params == '/Adminka/Broadcast/Text'
 """
 DIS.add_handler(MessageHandler(
     Filter & BaseFilters.FilterPersonalArea() & BaseFilters.FilterButtonWishesToImprove(),

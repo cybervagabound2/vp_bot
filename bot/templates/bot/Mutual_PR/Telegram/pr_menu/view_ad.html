@@ -1,18 +1,21 @@
 {% if Lang.lang == 'Eng' %}
 🗂 <b>Mutual PR</b> {{ Ad.subcategory }}
 
+Ad # {{ Ad.id }}
 <b>Channel:</b> {{ Ad.channel_name }}
 <b>Min. count:</b> {{ Ad.min_count }}
 <b>Comment:</b> {{ Ad.comment }}
 {% elif Lang.lang == 'Rus' %}
 🗂 <b>Взаимный пиар</b> {{ Ad.subcategory }}
 
+Объявление #{{ Ad.id }}
 <b>Канал:</b> {{ Ad.channel_name }}
 <b>Мин. количество:</b> {{ Ad.min_count }}
 <b>Комментарий:</b> {{ Ad.comment }}
 {% elif Lang.lang == 'Uzb' %}
 🗂 <b>Cross PR</b> {{ Ad.subcategory }}
 
+E'lon #{{ Ad.id }}
 <b>Kanal:</b> {{ Ad.channel_name }}
 <b>Min. miqdor:</b> {{ Ad.min_count }}
 <b>Izoh:</b> {{ Ad.comment }}

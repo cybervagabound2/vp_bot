@@ -16,6 +16,10 @@ from bot.handlers.Mutual_PR.Instagram.pr_menu import pr_menu_inst
 from bot.handlers.PersonalArea.SupportProject import support_project
 from bot.handlers.PersonalArea.Feedback import feedback
 from bot.handlers.Back import back_inline, back
+from bot.handlers.Adminka.admin import (admin_menu, send_msg_menu, send_msg_text, send_msg, reply_to_admin,
+                                        send_reply_to_admin, delete_ad_menu, delete_ad_reason, delete_ads,
+                                        broadcast_menu, broadcast_text, broadcast, statistic)
+from bot.handlers.MainMenu import MainMenu
 
 
 API_TOKEN = '721609870:AAGBix6dGkIqjsA1nAY_4AtqAftYhTrN-Sc'
@@ -24,7 +28,27 @@ DIS = Dispatcher(BOT, None, workers=0)
 DIS.add_handler(CommandHandler('start', start))
 Filter = Filters.text & Filters.private & BaseFilters.FilterBan() & BaseFilters.FilterRules()
 
-
+# Adminka
+DIS.add_handler(CommandHandler('admin', admin_menu))
+DIS.add_handler(CallbackQueryHandler(send_msg_menu, pattern='^admin_send_msg$'))
+DIS.add_handler(MessageHandler(Filter & BaseFilters.FilterAdminkaSendMsg(),
+                               send_msg_text, pass_user_data=True))
+DIS.add_handler(MessageHandler(Filter & BaseFilters.FilterAdminkaSendMsgText(),
+                               send_msg, pass_user_data=True))
+DIS.add_handler(CallbackQueryHandler(reply_to_admin, pattern='^admin_msg_reply$'))
+DIS.add_handler(MessageHandler(Filter & BaseFilters.FilterAdminkaReplyToAmin(),
+                               send_reply_to_admin))
+DIS.add_handler(CallbackQueryHandler(delete_ad_menu, pattern='^admin_delete_ad$'))
+DIS.add_handler(MessageHandler(Filter & BaseFilters.FilterAdminkaDeleteAd(),
+                               delete_ad_reason, pass_user_data=True))
+DIS.add_handler(MessageHandler(Filter & BaseFilters.FilterAdminkaReason(),
+                               delete_ads, pass_user_data=True))
+DIS.add_handler(CallbackQueryHandler(broadcast_menu, pattern='^admin_broadcast$'))
+DIS.add_handler(CallbackQueryHandler(broadcast_text, pattern=r'^broadcast_(.*)$',
+                                     pass_user_data=True))
+DIS.add_handler(MessageHandler(Filter & BaseFilters.FilterAdminkaBroadcastText(),
+                               broadcast, pass_user_data=True))
+DIS.add_handler(CallbackQueryHandler(statistic, pattern='^admin_statistic$'))
 DIS.add_handler(MessageHandler(
     Filter & BaseFilters.FilterBack(),
     back, pass_user_data=True))
@@ -42,8 +66,8 @@ DIS.add_handler(MessageHandler(
     Filter & BaseFilters.FilterMainMenu() & BaseFilters.FilterButtonPersonalArea(),
     personal_area.personal_area))
 """
-DIS.add_handler(RegexHandler('^(🗂 Список ВП|🗂 List of MP)$', mutual_pr.mutual_menu))
-DIS.add_handler(RegexHandler('^(💻 Личный кабинет|💻 Personal Area)$', personal_area.personal_area))
+DIS.add_handler(RegexHandler("^(🗂 Список ВП|🗂 List of MP|🗂 Ro'yxat Cross PR)$", mutual_pr.mutual_menu))
+DIS.add_handler(RegexHandler('^(💻 Личный кабинет|💻 Personal Area|💻 Shaxsiy kabinet)$', personal_area.personal_area))
 DIS.add_handler(MessageHandler(Filter & BaseFilters.FilterComment(),
                                create_ad.set_comment))
 
@@ -80,7 +104,7 @@ DIS.add_handler(MessageHandler(Filter & BaseFilters.FilterFeedbackSendMsg(),
 DIS.add_handler(CallbackQueryHandler(personal_area.my_ads, pattern='^PA_my_ads$'))
 DIS.add_handler(CallbackQueryHandler(create_ad.ad_category, pattern='^PA_create_ad$'))
 DIS.add_handler(CallbackQueryHandler(create_ad.set_ad_category, pattern=r'^PA_create_ad_category_(.*)$'))
-DIS.add_handler(CallbackQueryHandler(create_ad.set_ad_cat_subcat, pattern=r'^PA_subcategory_(.*)$'))
+DIS.add_handler(CallbackQueryHandler(create_ad.set_ad_cat_subcat, pattern=r'^Pa_subcategory_(.*)$'))
 # EditAds
 DIS.add_handler(CallbackQueryHandler(edit_ads.edit_ads_menu, pattern='^PA_edit_ad$'))
 DIS.add_handler(CallbackQueryHandler(edit_ads.edit, pattern='^PA_edit_ad(.*)$',

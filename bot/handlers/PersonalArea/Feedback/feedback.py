@@ -58,4 +58,4 @@ def send_message(bot, update):
     user.DelEndParams(3)
     user.SendMessage(bot=bot, msg=msg, save_massage_id=True)
     sleep(4)
-    personal_area.personal_area(bot, update)
+    MainMenu.MainMenu(bot, update)

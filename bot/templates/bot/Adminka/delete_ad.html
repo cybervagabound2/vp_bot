@@ -1,0 +1,13 @@
+{% if Lang.lang == 'Eng' %}
+Your ad is removed from the bot for the following reason:
+
+{{ Reason }}
+{% elif Lang.lang == 'Rus' %}
+Ваше объявление удалено из бота по следующей причине:
+
+{{ Reason }}
+{% elif Lang.lang == 'Uzb' %}
+Reklamangiz botdan quyidagi sabablarga ko'ra olib tashlandi:
+
+{{ Reason }}
+{% endif %}

@@ -1,0 +1,13 @@
+{% if Lang.lang == 'Eng' %}
+📩 New message from admin:
+
+{{ Text }}
+{% elif Lang.lang == 'Rus' %}
+📩 Новое сообщение от администратора:
+
+{{ Text }}
+{% elif Lang.lang == 'Uzb' %}
+📩 Administratordan yangi xabar:
+
+{{ Text }}
+{% endif %}
