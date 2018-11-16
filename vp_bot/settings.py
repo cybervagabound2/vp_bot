@@ -14,7 +14,7 @@ SECRET_KEY = 'gy@#3!h7k5pukc6^#&(=xv@rcd5zq@u-7b6zb6z#a!yjy#%5!@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['chitaikra.info', 'www.chitaikra.info', 'localhost', '80.211.79.90']
+ALLOWED_HOSTS = ['']
 
 
 # Application definition
